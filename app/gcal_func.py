@@ -47,7 +47,6 @@ def manage_data_for_new_date(data, date):
 
 def check_data_limit(data):
     for i in range(10):
-        print(cnt_events(data), i)
         if cnt_events(data) < 100:
             break
         data = adjust_events_to_limit(data, i)
@@ -98,6 +97,17 @@ def main():
         print(f"An error occurred: {error}")
 
 
+def response_django():
+    try:
+        creds = authenticate_google_calendar()
+        service = build("calendar", "v3", credentials=creds)
+        events = fetch_calendar_events(service)
+        processed_events = process_events(events)
+    except HttpError as error:
+        return {'error': str(error)}
+    return processed_events
+
+
 def fetch_calendar_events(service):
     print("Getting the events for the year 2023")
     start_date = datetime.datetime(2023, 1, 1, 0, 0, 0)
@@ -112,7 +122,6 @@ def fetch_calendar_events(service):
         fields="items(summary,start,end)"
     ).execute()
     events = events_result.get("items", [])
-    pprint.pprint(events)
     if not events:
         print("No upcoming events found.")
         return []

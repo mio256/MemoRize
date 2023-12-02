@@ -1,4 +1,4 @@
-from . import chatgpt_func
+from . import chatgpt_func, gcal_func
 from django.http import JsonResponse
 from django.views.generic import TemplateView
 
@@ -22,3 +22,8 @@ class IndexView(TemplateView):
         context['gpt_response'] = gpt_response['choices'][0]['message']['content']
 
         return context
+
+
+def calendar_view(request):
+    processed_events = gcal_func.response_django()
+    return JsonResponse(processed_events)
