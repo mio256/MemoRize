@@ -12,7 +12,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    os.environ['LOCAL_IP'],
 ]
 
 INSTALLED_APPS = [
@@ -35,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'local_gpt.urls'
+ROOT_URLCONF = 'memorize.urls'
 
 TEMPLATES = [
     {
@@ -53,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'local_gpt.wsgi.application'
+WSGI_APPLICATION = 'memorize.wsgi.application'
 
 
 # Database
