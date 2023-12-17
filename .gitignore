@@ -4,3 +4,4 @@
 /venv/
 *.json
 .env
+result.md
